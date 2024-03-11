@@ -58,28 +58,57 @@ var pairSum = function(head) {
     // Apply the fast and slow algorithm to find the node in the middle an its previousNode.
     let slow = head;
     let fast = head;
-    let curr = null;
-    let prevNode = null;
+    let prev = null;
+    let middleHead = null;
+    let afterNextNode = null;
+    let counter = 0;
+    let ans = 0
 
     while (fast && fast.next) {
-        prevNode = slow;
+        counter += 1;
+        middleHead = slow;
         slow = slow.next;
         fast = fast.next.next;
     }
 
-    curr = slow;
-
-    console.log(prevNode);
+    console.log(counter);
+    console.log(middleHead);
+    console.log(slow);
 
     // Revert the linked list from the middle node onwards and save a reference to the last node
 
-    while (curr) {
-        prevNode = slow.next
-        
+    let nextNode = slow.next;
+    slow.next = null;
+
+    while (nextNode != null) {
+        middleHead.next = nextNode;
+        afterNextNode = nextNode.next;
+        nextNode.next = slow;
+        slow = nextNode;
+        nextNode = afterNextNode;
     }
 
+    console.log(head);
     
     // Sum the twin nodes one by one to check which sum is the greates.
+
+    let sloww = head;
+    let fastt = head;
+
+    for (let i = 0; i < counter; i++) {
+        fastt = fastt.next;
+    }
+
+    console.log(fastt);
+
+    while (fastt != null) {
+        ans = Math.max(ans, sloww.val+fastt.val)
+        console.log("helo")
+        sloww = sloww.next;
+        fastt = fastt.next;
+    }
+
+    return ans
     
 };
 
