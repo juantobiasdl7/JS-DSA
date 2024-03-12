@@ -39,15 +39,14 @@ function main() {
 // Call main and assign the returned root to a variable
 let root = main();
 
-let preorderDfs = node => {
-    if (!node) {
-        return;
+var maxDepth = function(root) {
+    if (!root) {
+        return 0;
     }
-
-    console.log(node.val);
-    preorderDfs(node.left);
-    preorderDfs(node.right);
+    
+    let left = maxDepth(root.left);
+    let right = maxDepth(root.right);
+    return Math.max(left, right) + 1;
 };
 
-// Now you can call preorderDfs with the global root variable
-preorderDfs(root);
+maxDepth(root);
